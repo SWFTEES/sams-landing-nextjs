@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=DM+Sans:wght@400;500;700&family=Bebas+Neue&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --midnight: #0D0D0D;
+  --midnight-dark: #050505;
+  --red-neon: #E63946;
+  --cream: #F4E8C7;
+  --white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--midnight);
+  color: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .noise-overlay {
+    @apply fixed top-0 left-0 w-full h-full opacity-[0.03] z-[1] pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  }
+  
+  .hero-bg {
+    @apply absolute top-0 left-0 w-full h-full opacity-90 z-[1];
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a0808 50%, #0D0D0D 100%);
+  }
+  
+  .vignette {
+    @apply absolute top-0 left-0 w-full h-full z-[2] pointer-events-none;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(13, 13, 13, 0.5) 50%, rgba(13, 13, 13, 0.9) 100%);
+  }
+  
+  .neon-glow {
+    text-shadow: 
+      0 0 10px rgba(230, 57, 70, 0.8),
+      0 0 20px rgba(230, 57, 70, 0.6),
+      0 0 30px rgba(230, 57, 70, 0.4),
+      0 0 40px rgba(230, 57, 70, 0.2);
+  }
+  
+  .neon-glow-svg {
+    filter: brightness(1.1) contrast(1.1) drop-shadow(0 0 20px rgba(230, 57, 70, 0.5)) drop-shadow(0 0 40px rgba(230, 57, 70, 0.3));
+  }
+  
+  .event-card {
+    @apply bg-midnight-dark/50 border border-red-neon/20 rounded-lg p-6 transition-all duration-300 relative overflow-hidden;
+    backdrop-filter: blur(5px);
+  }
+  
+  .event-card::before {
+    content: '';
+    @apply absolute -inset-[2px] opacity-0 transition-opacity duration-300 z-[-1] rounded-lg;
+    background: linear-gradient(45deg, transparent, var(--red-neon), transparent);
+  }
+  
+  .event-card:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+  }
+  
+  .event-card:hover::before {
+    @apply opacity-30;
+  }
+  
+  .pillar-card {
+    @apply transition-all duration-300;
+    backdrop-filter: blur(5px);
+  }
+  
+  .pillar-card:hover {
+    @apply -translate-y-2;
+    box-shadow: 
+      0 20px 40px rgba(230, 57, 70, 0.15),
+      0 0 30px rgba(230, 57, 70, 0.1);
+    border-color: rgba(230, 57, 70, 0.4);
+  }
+  
+  .pillar-card .icon {
+    filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.5));
+  }
+  
+  .social-icon {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-full border border-cream/20 text-cream opacity-60 transition-all duration-300;
+  }
+  
+  .social-icon-primary {
+    @apply opacity-100 border-cream/30;
+  }
+  
+  .social-icon:hover {
+    @apply text-red-neon opacity-100 border-red-neon -translate-y-0.5;
+    box-shadow: 
+      0 0 15px rgba(230, 57, 70, 0.4),
+      0 0 25px rgba(230, 57, 70, 0.2);
+  }
+  
+  @media (min-width: 768px) {
+    .social-icon {
+      @apply w-11 h-11;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1.5s ease-out;
+}
