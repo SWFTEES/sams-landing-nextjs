@@ -8,7 +8,7 @@ export default function Pillars() {
     {
       icon: '🎰',
       title: 'Gaming',
-      description: 'The only lounge in Vegas where you can pull a lever between cocktails. $2.8M paid out in 2025.',
+      description: 'The only gentlemen\'s club in Vegas where you can play slots between cocktails. $2.8M paid out in 2025.',
     },
     {
       icon: '💃',
